@@ -1,10 +1,30 @@
 from fastapi import FastAPI
-from pydentic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from pydantic import BaseModel
 import pickle
 import json
 
 
 app=FastAPI()
+
+# Add CORS middleware to allow requests from HTML page
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, replace with specific domains
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Serve static files (for CSS, JS, images if needed)
+app.mount("/static", StaticFiles(directory="."), name="static")
+
+# Serve the HTML page at root
+@app.get("/")
+async def read_index():
+    return FileResponse('index.html')
 
 class Model_input(BaseModel):
     Pregnancies:int
