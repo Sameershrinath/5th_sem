@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255,255,255,0.85);
+            padding: 2rem 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(44, 62, 80, 0.15);
+            text-align: center;
+        }
+        h1 {
+            color: #34495e;
+            margin-bottom: 0.5em;
+        }
+        .design {
+            color: #888;
+            font-size: 1.1em;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello, World!</h1>
+        <div class="design">
+            <strong>High Level Design:</strong><br>
+            This page demonstrates a simple static HTML structure styled with modern CSS.<br>
+            The design uses a gradient background, centered content, and a card-like container for clarity and aesthetics.
+        </div>
+    </div>
+
+    <button onclick="window.location.href='/name'" style="margin-top: 2em; padding: 0.7em 2em; font-size: 1.1em; border: none; border-radius: 8px; background: #74ebd5; color: #34495e; cursor: pointer; box-shadow: 0 2px 8px rgba(44,62,80,0.08); transition: background 0.2s;">
+        Go to /name
+    </button>
+    <button onclick="window.location.href='/users'" style="margin-top: 2em; padding: 0.7em 2em; font-size: 1.1em; border: none; border-radius: 8px; background: #74ebd5; color: #34495e; cursor: pointer; box-shadow: 0 2px 8px rgba(44,62,80,0.08); transition: background 0.2s;">
+        Go to /users
+    </button>
+    <form id="userForm" style="margin-top: 2em; background: rgba(255,255,255,0.85); padding: 1.5em 2em; border-radius: 12px; box-shadow: 0 2px 12px rgba(44,62,80,0.08); display: inline-block;">
+        <div style="margin-bottom: 1em;">
+            <label for="name" style="display: block; margin-bottom: 0.3em; color: #34495e;">Name:</label>
+            <input type="text" id="name" name="name" required style="padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; width: 200px;">
+        </div>
+        <div style="margin-bottom: 1em;">
+            <label for="age" style="display: block; margin-bottom: 0.3em; color: #34495e;">Age:</label>
+            <input type="number" id="age" name="age" min="0" required style="padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; width: 200px;">
+        </div>
+        <button type="submit" style="padding: 0.6em 1.5em; font-size: 1em; border: none; border-radius: 8px; background: #ACB6E5; color: #34495e; cursor: pointer; box-shadow: 0 2px 8px rgba(44,62,80,0.08); transition: background 0.2s;">
+            Submit
+        </button>
+    </form>
+    <div id="userList" style="margin-top:2em;"></div>
+    <script>
+        const form = document.getElementById('userForm');
+        const userList = document.getElementById('userList');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+
+            await fetch('/submit', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({name, age: Number(age)})
+            });
+
+            form.reset();
+            loadUsers();
+        });
+
+        async function loadUsers() {
+            const res = await fetch('/users');
+            const data = await res.json();
+            userList.innerHTML = '<h3>Submitted Users:</h3>' +
+                '<ul style="list-style:none;padding:0;">' +
+                data.users.map(u => `<li style="margin-bottom:0.5em;">${u.name} (Age: ${u.age})</li>`).join('') +
+                '</ul>';
+        }
+
+        // Load users on page load
+        loadUsers();
+    </script>
+</body>
+</html>
