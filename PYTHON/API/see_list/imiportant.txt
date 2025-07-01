@@ -1,0 +1,10 @@
+sometimes it happens i opened the server on local host and forgot then do this steps
+
+netstat -ano | findstr :8000
+
+find for the
+TCP    127.0.0.1:8000    0.0.0.0:0    LISTENING    12345
+
+
+and kill it by 
+taskkill /PID 12345 /F
