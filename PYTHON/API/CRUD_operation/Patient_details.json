@@ -1,0 +1,92 @@
+{
+    "P001": {
+        "name": "Samir",
+        "city": "Mumbai",
+        "age": 50,
+        "gender": "M",
+        "height": "90",
+        "BMI": "35.6",
+        "Verdict": "Overweight"
+    },
+    "P002": {
+        "name": "Aisha",
+        "city": "Delhi",
+        "age": 28,
+        "gender": "F",
+        "height": "165",
+        "BMI": "22.1",
+        "Verdict": "Normal"
+    },
+    "P003": {
+        "name": "Ravi",
+        "city": "Chennai",
+        "age": 34,
+        "gender": "M",
+        "height": "175",
+        "BMI": "18.9",
+        "Verdict": "Underweight"
+    },
+    "P004": {
+        "name": "Neha",
+        "city": "Pune",
+        "age": 41,
+        "gender": "F",
+        "height": "160",
+        "BMI": "31.4",
+        "Verdict": "Obese"
+    },
+    "P005": {
+        "name": "Arjun",
+        "city": "Bangalore",
+        "age": 22,
+        "gender": "M",
+        "height": "180",
+        "BMI": "25.5",
+        "Verdict": "Overweight"
+    },
+    "P006": {
+        "name": "Priya",
+        "city": "Hyderabad",
+        "age": 30,
+        "gender": "F",
+        "height": "158",
+        "BMI": "21.7",
+        "Verdict": "Normal"
+    },
+    "P007": {
+        "name": "Kabir",
+        "city": "Jaipur",
+        "age": 45,
+        "gender": "M",
+        "height": "170",
+        "BMI": "27.8",
+        "Verdict": "Overweight"
+    },
+    "P008": {
+        "name": "Meena",
+        "city": "Kolkata",
+        "age": 60,
+        "gender": "F",
+        "height": "155",
+        "BMI": "29.5",
+        "Verdict": "Overweight"
+    },
+    "P009": {
+        "name": "Aman",
+        "city": "Ahmedabad",
+        "age": 36,
+        "gender": "M",
+        "height": "172",
+        "BMI": "23.4",
+        "Verdict": "Normal"
+    },
+    "P010": {
+        "name": "Sneha",
+        "city": "Surat",
+        "age": 26,
+        "gender": "F",
+        "height": "162",
+        "BMI": "19.2",
+        "Verdict": "Underweight"
+    }
+}
