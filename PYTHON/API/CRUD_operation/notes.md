@@ -17,3 +17,12 @@ CRUD operations are fundamental for managing persistent storage in applications.
 - **DELETE**: Removes resources from the server, such as deleting a user record.
 
 These HTTP methods map directly to CRUD operations in RESTful APIs, enabling standardized communication between clients and servers.
+
+
+*********************************************************************************
+status code starting
+----------
+2 - success
+3 - redirection 
+4 - client side error
+5 - service side error
