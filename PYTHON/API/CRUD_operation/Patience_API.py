@@ -140,6 +140,8 @@ def update_patient(patient_id:str,patient_update:PatientUpdate):
 @app.delete("/delete/{patient_id}")
 def deleting_patient(patient_id:str):
     data=load_data()
+    if patient_id not in data:
+        raise HTTPException(status_code=400,detail="Patient not found")
     del data[patient_id]
     save_data(data=data)
     return {"message":f"{patient_id} is now deleted from database"}
