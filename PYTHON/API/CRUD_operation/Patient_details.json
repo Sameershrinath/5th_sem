@@ -74,10 +74,10 @@
         "city": "Kolkata",
         "age": 60,
         "gender": "F",
-        "height": 1.55,
-        "weight": 68,
-        "BMI": 28.3,
-        "Verdict": "Overweight"
+        "height": 1.2,
+        "weight": 90.0,
+        "BMI": 62.5,
+        "Verdict": "Obese"
     },
     "P009": {
         "name": "Aman",
@@ -88,15 +88,5 @@
         "weight": 70,
         "BMI": 23.66,
         "Verdict": "Normal"
-    },
-    "P010": {
-        "name": "Sneha",
-        "city": "Surat",
-        "age": 26,
-        "gender": "F",
-        "height": 1.62,
-        "weight": 48,
-        "BMI": 18.29,
-        "Verdict": "Under-weight"
     }
 }
