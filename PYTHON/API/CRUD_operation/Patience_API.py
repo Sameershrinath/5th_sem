@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Path, HTTPException, Query
 import json
-from typing import Annotated, Literal
-from pydantic import BaseModel, Field,
+from typing import Annotated, Literal,Optional
+from pydantic import BaseModel, Field
 from fastapi.responses import JSONResponse
 
 app = FastAPI()
@@ -15,6 +15,15 @@ class Patient(BaseModel):
     gender: Annotated[Literal["male", "female", "others"], Field(..., description="male, female, others")]
     height: Annotated[float, Field(..., gt=0, description="Height in meters")]
     weight: Annotated[float, Field(..., gt=1, description="Weight in kg")]
+
+# --- Patient Input model for modificaiton unrequired fields
+class PatientUpdate(BaseModel):
+    name: Annotated[Optional[str], Field(default=None)]
+    city: Annotated[Optional[str], Field(default=None)]
+    age: Annotated[Optional[int], Field(default=None,gt=0)]
+    gender: Annotated[Optional[Literal["male","female"]], Field(default=None)]
+    height: Annotated[Optional[float], Field(default=None,gt=0)]
+    weight: Annotated[Optional[float], Field(default=None,gt=0)]
 
 # --- Load patient data ---
 def load_data():
@@ -85,7 +94,6 @@ def create_patient(patient: Patient):
         "Normal" if bmi < 30 else
         "Obese"
     )
-
     data[patient.id] = {
         "name": patient.name,
         "city": patient.city,
@@ -96,6 +104,43 @@ def create_patient(patient: Patient):
         "BMI": bmi,
         "Verdict": verdict
     }
-
     save_data(data)
     return JSONResponse(status_code=201, content={'message': "Patient created successfully"})
+
+# put (update)
+@app.put("/edit/{patient_id}")
+def update_patient(patient_id:str,patient_update:PatientUpdate):
+    data=load_data()
+    if patient_id not in data:
+        raise HTTPException(status_code=404,detail='patient not found')
+    exisitng_patient_info=data[patient_id]
+    # convert the patient_update into the dictionary 
+    updated_patient_info=patient_update.model_dump(exclude_unset=True)
+    
+    #updation
+    for key,value in updated_patient_info.items():
+        exisitng_patient_info[key]=value
+    
+    #updating bmi and verdict
+    bmi=round((exisitng_patient_info['weight']/(exisitng_patient_info['height']**2)),2)
+    verdict = (
+        "Under-weight" if bmi < 18.5 else
+        "Normal" if bmi < 30 else
+        "Obese"
+    )
+    exisitng_patient_info["BMI"]=bmi
+    exisitng_patient_info["Verdict"]=verdict
+
+
+    data[patient_id]=exisitng_patient_info
+    save_data(data=data)
+    return HTTPException(status_code=201,detail={'message':"success in updation"})
+
+#deletion of the data
+@app.delete("/delete/{patient_id}")
+def deleting_patient(patient_id:str):
+    data=load_data()
+    del data[patient_id]
+    save_data(data=data)
+    return {"message":f"{patient_id} is now deleted from database"}
+
