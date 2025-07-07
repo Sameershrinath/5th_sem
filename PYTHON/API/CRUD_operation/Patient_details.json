@@ -4,17 +4,19 @@
         "city": "Mumbai",
         "age": 50,
         "gender": "M",
-        "height": "90",
-        "BMI": "35.6",
-        "Verdict": "Overweight"
+        "height": 0.9,
+        "weight": 65,
+        "BMI": 80.25,
+        "Verdict": "Obese"
     },
     "P002": {
         "name": "Aisha",
         "city": "Delhi",
         "age": 28,
         "gender": "F",
-        "height": "165",
-        "BMI": "22.1",
+        "height": 1.65,
+        "weight": 54,
+        "BMI": 19.83,
         "Verdict": "Normal"
     },
     "P003": {
@@ -22,17 +24,19 @@
         "city": "Chennai",
         "age": 34,
         "gender": "M",
-        "height": "175",
-        "BMI": "18.9",
-        "Verdict": "Underweight"
+        "height": 1.75,
+        "weight": 60,
+        "BMI": 19.59,
+        "Verdict": "Normal"
     },
     "P004": {
         "name": "Neha",
         "city": "Pune",
         "age": 41,
         "gender": "F",
-        "height": "160",
-        "BMI": "31.4",
+        "height": 1.6,
+        "weight": 82,
+        "BMI": 32.03,
         "Verdict": "Obese"
     },
     "P005": {
@@ -40,17 +44,19 @@
         "city": "Bangalore",
         "age": 22,
         "gender": "M",
-        "height": "180",
-        "BMI": "25.5",
-        "Verdict": "Overweight"
+        "height": 1.8,
+        "weight": 78,
+        "BMI": 24.07,
+        "Verdict": "Normal"
     },
     "P006": {
         "name": "Priya",
         "city": "Hyderabad",
         "age": 30,
         "gender": "F",
-        "height": "158",
-        "BMI": "21.7",
+        "height": 1.58,
+        "weight": 52,
+        "BMI": 20.78,
         "Verdict": "Normal"
     },
     "P007": {
@@ -58,8 +64,9 @@
         "city": "Jaipur",
         "age": 45,
         "gender": "M",
-        "height": "170",
-        "BMI": "27.8",
+        "height": 1.7,
+        "weight": 75,
+        "BMI": 25.95,
         "Verdict": "Overweight"
     },
     "P008": {
@@ -67,8 +74,9 @@
         "city": "Kolkata",
         "age": 60,
         "gender": "F",
-        "height": "155",
-        "BMI": "29.5",
+        "height": 1.55,
+        "weight": 68,
+        "BMI": 28.3,
         "Verdict": "Overweight"
     },
     "P009": {
@@ -76,8 +84,9 @@
         "city": "Ahmedabad",
         "age": 36,
         "gender": "M",
-        "height": "172",
-        "BMI": "23.4",
+        "height": 1.72,
+        "weight": 70,
+        "BMI": 23.66,
         "Verdict": "Normal"
     },
     "P010": {
@@ -85,18 +94,9 @@
         "city": "Surat",
         "age": 26,
         "gender": "F",
-        "height": "162",
-        "BMI": "19.2",
-        "Verdict": "Underweight"
-    },
-    "P0010": {
-        "name": "Amit kumar 4",
-        "city": "jaipur",
-        "age": 50,
-        "gender": "male",
-        "height": 1.0,
-        "weight": 2.0,
-        "BMI": 2.0,
+        "height": 1.62,
+        "weight": 48,
+        "BMI": 18.29,
         "Verdict": "Under-weight"
     }
 }
