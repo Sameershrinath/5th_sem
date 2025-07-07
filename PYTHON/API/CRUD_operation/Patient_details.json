@@ -88,5 +88,15 @@
         "height": "162",
         "BMI": "19.2",
         "Verdict": "Underweight"
+    },
+    "P0010": {
+        "name": "Amit kumar 4",
+        "city": "jaipur",
+        "age": 50,
+        "gender": "male",
+        "height": 1.0,
+        "weight": 2.0,
+        "BMI": 2.0,
+        "Verdict": "Under-weight"
     }
 }
