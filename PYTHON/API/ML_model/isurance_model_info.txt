@@ -1,0 +1,10 @@
+git link :- https://github.com/campusx-official/fastapi-demo-api.git
+
+
+
+trained using :
+Random forest classifier 
+
+parameters input:
+
+
