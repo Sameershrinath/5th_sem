@@ -1,0 +1,8 @@
+- Number of Pregnancies (int)
+- Glucose Level (float)
+- Blood Pressure (float)
+- Skin Thickness (float)
+- Insulin Level (float)
+- Body Mass Index (BMI) (float)
+- Diabetes Pedigree Function (float)
+- Age (int)
