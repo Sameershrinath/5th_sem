@@ -9,7 +9,7 @@ import json
 
 app=FastAPI()
 
-# Add CORS middleware to allow requests from HTML page
+# Add CORS middleware to allow requests from HTML page and Streamlit
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # In production, replace with specific domains
@@ -37,6 +37,21 @@ class Model_input(BaseModel):
     Age:int
 
 diabetes_model=pickle.load(open("diabetes_model.sav","rb"))
+
+@app.get('/health')
+def health_check():
+    return {"status": "healthy", "message": "Diabetes prediction API is running"}
+
+@app.get('/model-info')
+def get_model_info():
+    try:
+        with open("modelinfo.txt", "r") as f:
+            model_info = f.read()
+        return {"model_info": model_info}
+    except FileNotFoundError:
+        return {"error": "Model information file not found"}
+    except Exception as e:
+        return {"error": f"Error reading model information: {str(e)}"}
 
 @app.post('/diabetes_prediction')
 def diabetes_pred(input_parameters:Model_input):
