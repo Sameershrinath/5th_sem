@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field, computed_field
 from typing import Literal, Annotated
 import pickle
 import pandas as pd
+from fastapi.responses import FileResponse
 
 # import the ml model
 with open('./insurance_model.pkl', 'rb') as f:
@@ -68,6 +69,10 @@ class UserInput(BaseModel):
             return 2
         else:
             return 3
+
+@app.get("/")
+def hello():
+    return FileResponse("index.html")
 
 @app.post('/predict')
 def predict_premium(data: UserInput):
