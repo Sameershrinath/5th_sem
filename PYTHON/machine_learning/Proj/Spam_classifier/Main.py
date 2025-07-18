@@ -54,7 +54,7 @@ st.markdown("""
         font-size: 1.2rem;
         font-weight: bold;
     }
-    .ham-result {
+    .Not_Spam-result {
         background-color: #E8F5E8;
         color: #2E7D32;
         padding: 1.5rem;
@@ -70,6 +70,7 @@ st.markdown("""
         border-radius: 10px;
         border-left: 5px solid #2196F3;
         margin-bottom: 2rem;
+        color:#000000;
     }
     .warning-box {
         background-color: #FFF3E0;
@@ -77,6 +78,7 @@ st.markdown("""
         border-radius: 10px;
         border-left: 5px solid #FF9800;
         margin-bottom: 1rem;
+        color:#000000;
     }
     .example-box {
         background-color: #F5F5F5;
@@ -139,7 +141,7 @@ def load_model():
         st.stop()
 
 def predict_spam(text, model, tfidf):
-    """Predict if the text is spam or ham"""
+    """Predict if the text is spam or Not_Spam"""
     # Transform the text
     transformed_text = transform_text(text)
     
@@ -179,7 +181,7 @@ st.markdown("""
     <h3>🔍 How it works:</h3>
     <p>This classifier uses Natural Language Processing and Machine Learning to analyze text messages and emails. 
     It processes the text through several steps including tokenization, stemming, and feature extraction using TF-IDF, 
-    then uses a Multinomial Naive Bayes algorithm to classify the message as spam or legitimate (ham).</p>
+    then uses a Multinomial Naive Bayes algorithm to classify the message as spam or legitimate (Not_Spam).</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -214,11 +216,11 @@ with tab1:
                             <p>Confidence: {probability[1]:.2%}</p>
                         </div>
                         """, unsafe_allow_html=True)
-                    else:  # Ham
+                    else:  # Not_Spam
                         st.markdown(f"""
-                        <div class="ham-result">
+                        <div class="Not_Spam-result">
                             <h3>✅ LEGITIMATE MESSAGE</h3>
-                            <p>This message is classified as <strong>HAM (Not Spam)</strong></p>
+                            <p>This message is classified as <strong>Not_Spam</strong></p>
                             <p>Confidence: {probability[0]:.2%}</p>
                         </div>
                         """, unsafe_allow_html=True)
@@ -228,7 +230,7 @@ with tab1:
                     col1, col2 = st.columns(2)
                     
                     with col1:
-                        st.metric("Ham (Not Spam)", f"{probability[0]:.2%}")
+                        st.metric("Not_Spam (Not Spam)", f"{probability[0]:.2%}")
                     
                     with col2:
                         st.metric("Spam", f"{probability[1]:.2%}")
@@ -278,7 +280,7 @@ with tab2:
                     for text in df[text_column]:
                         try:
                             pred, prob = predict_spam(str(text), model, tfidf)
-                            predictions.append("Spam" if pred == 1 else "Ham")
+                            predictions.append("Spam" if pred == 1 else "Not_Spam")
                             probabilities.append(prob[1])  # Spam probability
                         except:
                             predictions.append("Error")
@@ -300,8 +302,8 @@ with tab2:
                         st.metric("Spam Messages", spam_count)
                     
                     with col2:
-                        ham_count = sum(1 for p in predictions if p == "Ham")
-                        st.metric("Ham Messages", ham_count)
+                        Not_Spam_count = sum(1 for p in predictions if p == "Not_Spam")
+                        st.metric("Not_Spam Messages", Not_Spam_count)
                     
                     with col3:
                         total_messages = len(predictions)
@@ -341,7 +343,7 @@ with tab2:
                             "Message #": i,
                             "Message": message[:50] + "..." if len(message) > 50 else message,
                             "Full Message": message,
-                            "Prediction": "Spam" if pred == 1 else "Ham",
+                            "Prediction": "Spam" if pred == 1 else "Not_Spam",
                             "Spam Probability": f"{prob[1]:.2%}"
                         })
                     except Exception as e:
@@ -359,13 +361,13 @@ with tab2:
                 
                 # Summary
                 spam_count = sum(1 for r in results if r["Prediction"] == "Spam")
-                ham_count = sum(1 for r in results if r["Prediction"] == "Ham")
+                Not_Spam_count = sum(1 for r in results if r["Prediction"] == "Not_Spam")
                 
                 col1, col2 = st.columns(2)
                 with col1:
                     st.metric("Spam Messages", spam_count)
                 with col2:
-                    st.metric("Ham Messages", ham_count)
+                    st.metric("Not_Spam Messages", Not_Spam_count)
 
 with tab3:
     st.header("📈 Example Messages")
@@ -379,7 +381,7 @@ with tab3:
             "Hot singles in your area! Meet them tonight! Register free!",
             "WINNER! You've been selected for a £500 shopping voucher. Reply STOP to opt out."
         ],
-        "Ham (Legitimate) Examples": [
+        "Not_Spam (Legitimate) Examples": [
             "Hi, are we still meeting for lunch tomorrow at 12pm?",
             "Your appointment is confirmed for Monday at 3pm. Please arrive 10 minutes early.",
             "Thanks for your help today. The presentation went really well!",
@@ -408,8 +410,8 @@ with tab3:
                     """, unsafe_allow_html=True)
                 else:
                     st.markdown(f"""
-                    <div class="ham-result">
-                        <strong>Prediction: HAM</strong><br>
+                    <div class="Not_Spam-result">
+                        <strong>Prediction: Not_Spam</strong><br>
                         Confidence: {prob[0]:.2%}
                     </div>
                     """, unsafe_allow_html=True)
