@@ -1,11 +1,12 @@
 import streamlit as st
 import pandas as pd
 import nltk
+from nltk.stem import WordNetLemmatizer,PorterStemmer
 
 # Use Streamlit's page navigation with radio buttons
 # page = st.sidebar.radio("Select Projects", ["ASCII Value Checker", "ABC"])
 
-tab1, tab2, tab3, tab4,tab5 = st.tabs(["Check word ASCII", "Word Tokenizer", "Sentence Tokenizer","what computer see","Capitalize"])
+tab1, tab2, tab3, tab4,tab5,tab6 = st.tabs(["Text to ASCII", "Word Tokenizer", "Sentence Tokenizer","what computer see","Capitalize","Lemmatization/Stemming"])
 
 with tab1:
     st.title("Check ASCII value")
@@ -54,3 +55,30 @@ with tab5:
     button_cap=st.button("Capitalize")
     if button_cap:
         st.text(final_capitalized_text)
+with tab6:
+    st.title("Stemming")
+    st.info("Stemming is a text normalization technique in NLP where words are reduced to their root form by removing suffixes and prefixes, often resulting in non-dictionary words.")
+    nltk.download("omw-1.4")
+    nltk.download("wordnet")
+    
+    with st.form("Stemming Form"):
+        data_stem = st.text_input("Enter the word")
+        submitted_stem = st.form_submit_button("Convert")
+    if submitted_stem and data_stem:
+        stem=PorterStemmer()
+        st.success("Stemmed Sentence:")
+        st.write(stem.stem(data_stem))
+
+
+
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.title("Lemmatization")
+    st.info("Lemmatization is a text normalization technique in NLP where a word is reduced to its base or dictionary form, known as the lemma.")
+    
+    with st.form("lemmatization_form"):
+        data_lemma = st.text_input("Enter the word")
+        submitted = st.form_submit_button("Convert")
+    if submitted and data_lemma:
+        lem=WordNetLemmatizer()
+        st.success("Lemmatized Sentence:")
+        st.write(lem.lemmatize(data_lemma))
