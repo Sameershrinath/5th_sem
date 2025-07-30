@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import nltk
 from nltk.stem import WordNetLemmatizer,PorterStemmer
+# from nltk.corpus import wordnet
 
 # Use Streamlit's page navigation with radio buttons
 # page = st.sidebar.radio("Select Projects", ["ASCII Value Checker", "ABC"])
@@ -82,3 +83,21 @@ with tab6:
         lem=WordNetLemmatizer()
         st.success("Lemmatized Sentence:")
         st.write(lem.lemmatize(data_lemma))
+# with tab7:
+#     st.title("Synonyms and Antonyms Finder")
+#     import nltk
+#     from nltk.corpus import wordnet
+#     nltk.download('wordnet')
+
+#     word = st.text_input("Enter a word to find synonyms and antonyms")
+#     if word:
+#         synonyms = set()
+#         antonyms = set()
+#         for syn in wordnet.synsets(word):
+#             for lemma in syn.lemmas():
+#                 synonyms.add(lemma.name())
+#                 if lemma.antonyms():
+#                     for ant in lemma.antonyms():
+#                         antonyms.add(ant.name())
+#         st.write("Synonyms:", ", ".join(sorted(synonyms)) if synonyms else "None found")
+#         st.write("Antonyms:", ", ".join(sorted(antonyms)) if antonyms else "None found")
