@@ -23,3 +23,12 @@ def division(a: int, b: int):
     if b == 0:
         return {"Error": "Cannot divide by zero"}
     return {"Solution": (a / b)}
+
+li=[]
+@app.post("/check")
+def receive(data):
+    li.append(data.msg)
+
+@app.get("/check2")
+def list_ope():
+    return {"msg":li}
