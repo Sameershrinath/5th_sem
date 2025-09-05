@@ -1,0 +1,2 @@
+# Ignore environment files in the specified directory
+.\PYTHON\machine_learning\Proj\vectordatabase*.env
