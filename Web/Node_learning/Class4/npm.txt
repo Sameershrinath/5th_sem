@@ -1,0 +1,7 @@
+npm install <package-name>
+
+-same: adds the package to the project's dependencies in package.json
+-save-dev : adds the package to the project's devDependencies (only in dev)
+-g : install globally 
+-save-exact : install the exact version specified without updating for the new version
+-force: Force fully install 

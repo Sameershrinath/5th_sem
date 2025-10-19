@@ -1,0 +1,15 @@
+{
+  "name": "npm-test",
+  "version": "1.0.0",
+  "description": "This project is beign created to learn about NPM",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Sameer Shrinath",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
