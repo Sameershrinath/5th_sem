@@ -1,3 +1,5 @@
+//learning the sync and async operation 
+
 const fs= require('fs');
 console.log('1. start of the script');
 
