@@ -3,6 +3,9 @@ const express = require("express");
 const app = express();
 app.use(express.urlencoded({ extended: true })); // parses form data
 
+//npm install bodyParser
+// const bodyParser=require("bodyParser");
+// app.use(bodyParser.urlencoded());
 
 //first middle-ware
 app.use((req,res,next)=>{
@@ -28,8 +31,8 @@ app.get("/",(req,res,next)=>{
 
 app.get("/contact",(req,res,next)=>{
     res.send(`
-        <h2>Contact Us</h2>
-  <form action="/contactus" method="post">
+    <h2>Contact Us</h2>
+    <form action="/contactus" method="post">
     <label for="name">Name:</label><br>
     <input type="text" id="name" name="name" required><br><br>
 
