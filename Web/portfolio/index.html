@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sameer Shrinath | Portfolio</title>
+  <style>
+    /* ---------- Reset & Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f1a;
+      --surface: #1a1a2e;
+      --card: #16213e;
+      --accent: #e94560;
+      --accent2: #0f3460;
+      --text: #eaeaea;
+      --muted: #8892b0;
+      --border: #2a2a4a;
+      --radius: 12px;
+      --transition: 0.3s ease;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- Scrollbar ---------- */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ---------- Navbar ---------- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(15, 15, 26, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.9rem; font-weight: 500; color: var(--muted);
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: var(--transition); }
+
+    /* ---------- Sections ---------- */
+    section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+    /* ---------- Hero ---------- */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding-top: 6rem;
+    }
+    .hero-greeting {
+      font-size: 1rem; color: var(--accent);
+      letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .hero-name {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800; line-height: 1.1;
+      background: linear-gradient(135deg, #fff 40%, var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-title {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--muted); margin-top: 0.75rem;
+    }
+    .hero-title span { color: var(--accent); }
+    .hero-desc {
+      max-width: 540px; margin-top: 1.5rem;
+      color: var(--muted); font-size: 1rem;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;
+    }
+    .btn {
+      padding: 0.75rem 1.8rem; border-radius: 50px; font-size: 0.9rem;
+      font-weight: 600; cursor: pointer; transition: var(--transition);
+      border: 2px solid transparent;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+    }
+    .btn-primary:hover { background: transparent; border-color: var(--accent); color: var(--accent); }
+    .btn-outline {
+      background: transparent; border-color: var(--muted); color: var(--text);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-social { display: flex; gap: 1rem; margin-top: 2rem; }
+    .hero-social a {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    .hero-social a:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ---------- Section heading ---------- */
+    .section-heading {
+      text-align: center; margin-bottom: 3rem;
+    }
+    .section-heading h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+    }
+    .section-heading h2 span { color: var(--accent); }
+    .section-heading p { color: var(--muted); margin-top: 0.5rem; }
+    .divider {
+      width: 60px; height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px; margin: 0.75rem auto 0;
+    }
+
+    /* ---------- About ---------- */
+    #about { padding-top: 6rem; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center;
+    }
+    .about-avatar {
+      width: 260px; height: 260px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 6rem; margin: 0 auto;
+      box-shadow: 0 0 40px rgba(233, 69, 96, 0.3);
+    }
+    .about-text h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; }
+    .about-info { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+    .about-info-item { display: flex; gap: 0.75rem; }
+    .about-info-item strong { color: var(--text); min-width: 90px; }
+    .about-info-item span { color: var(--muted); }
+
+    /* ---------- Skills ---------- */
+    #skills { background: var(--surface); border-radius: var(--radius); }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;
+    }
+    .skill-category {
+      background: var(--card); border-radius: var(--radius);
+      padding: 1.5rem; border: 1px solid var(--border);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .skill-category:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(233,69,96,0.15); }
+    .skill-category h3 {
+      font-size: 1rem; margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .skill-category h3 .icon { font-size: 1.3rem; }
+    .skill-bar { margin-bottom: 0.9rem; }
+    .skill-bar-label {
+      display: flex; justify-content: space-between;
+      font-size: 0.85rem; margin-bottom: 0.35rem; color: var(--muted);
+    }
+    .skill-bar-label span:last-child { color: var(--accent); }
+    .skill-bar-track {
+      height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      width: 0; transition: width 1s ease;
+    }
+
+    /* ---------- Projects ---------- */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card); border-radius: var(--radius);
+      padding: 1.75rem; border: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 0.75rem;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(233,69,96,0.2); }
+    .project-icon { font-size: 2.2rem; }
+    .project-card h3 { font-size: 1.1rem; }
+    .project-card p { color: var(--muted); font-size: 0.9rem; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.75rem;
+      background: rgba(233, 69, 96, 0.12); color: var(--accent); border: 1px solid rgba(233,69,96,0.25);
+    }
+    .project-links { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+    .project-links a {
+      font-size: 0.82rem; color: var(--muted); border-bottom: 1px solid var(--border);
+      padding-bottom: 2px; transition: color var(--transition), border-color var(--transition);
+    }
+    .project-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---------- Contact ---------- */
+    #contact { background: var(--surface); border-radius: var(--radius); }
+    .contact-wrapper {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem;
+    }
+    .contact-info h3 { font-size: 1.3rem; margin-bottom: 1rem; }
+    .contact-info p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .contact-detail {
+      display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;
+    }
+    .contact-detail .icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(233,69,96,0.12); border: 1px solid rgba(233,69,96,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .contact-detail span { color: var(--muted); font-size: 0.9rem; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-group label { font-size: 0.85rem; color: var(--muted); }
+    .form-group input,
+    .form-group textarea {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.75rem 1rem; color: var(--text);
+      font-size: 0.9rem; font-family: inherit; outline: none;
+      transition: border-color var(--transition);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    /* ---------- Footer ---------- */
+    footer {
+      text-align: center; padding: 2rem;
+      border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem;
+    }
+    footer span { color: var(--accent); }
+
+    /* ---------- Toast ---------- */
+    #toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: var(--card); border: 1px solid var(--accent);
+      color: var(--text); padding: 0.85rem 1.5rem; border-radius: 8px;
+      font-size: 0.9rem; opacity: 0; pointer-events: none;
+      transform: translateY(20px); transition: all 0.4s ease;
+      z-index: 999;
+    }
+    #toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); padding: 1rem 2rem; border-bottom: 1px solid var(--border); gap: 1rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-logo">SS</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <p class="hero-greeting">Hello, World 👋</p>
+    <h1 class="hero-name">Sameer Shrinath</h1>
+    <p class="hero-title">
+      <span id="typed-text"></span><span class="cursor">|</span>
+    </p>
+    <p class="hero-desc">
+      Passionate developer exploring the intersection of Machine Learning, Data Science,
+      and full-stack web development. Building intelligent solutions one commit at a time.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-social">
+      <a href="https://github.com/Sameershrinath" target="_blank" rel="noopener" title="GitHub">
+        <!-- GitHub SVG icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.1.82-.26.82-.58v-2.02c-3.34.72-4.04-1.6-4.04-1.6-.54-1.38-1.32-1.75-1.32-1.75-1.08-.74.08-.72.08-.72 1.2.08 1.83 1.23 1.83 1.23 1.06 1.82 2.78 1.3 3.46 1 .1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.56 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z"/>
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com/in/sameershrinath" target="_blank" rel="noopener" title="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45C23.2 24 24 23.23 24 22.27V1.73C24 .77 23.2 0 22.22 0z"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-heading">
+      <h2>About <span>Me</span></h2>
+      <div class="divider"></div>
+      <p>A little bit about who I am</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-avatar">🧑‍💻</div>
+      <div class="about-text">
+        <h3>Hi, I'm Sameer Shrinath</h3>
+        <p>
+          I'm a 5th semester Computer Science student with a strong passion for
+          Artificial Intelligence, Machine Learning, and Data Science. I love turning
+          data into actionable insights and building end-to-end intelligent applications.
+        </p>
+        <p>
+          Beyond AI, I enjoy building RESTful APIs with Python (Django/Flask) and
+          exploring Node.js for backend development. I believe in learning by doing —
+          every project in this portfolio is a reflection of that philosophy.
+        </p>
+        <div class="about-info">
+          <div class="about-info-item">
+            <strong>Degree</strong>
+            <span>B.E. Computer Science (5th Semester)</span>
+          </div>
+          <div class="about-info-item">
+            <strong>Interests</strong>
+            <span>ML, NLP, Data Science, Web Dev</span>
+          </div>
+          <div class="about-info-item">
+            <strong>GitHub</strong>
+            <span><a href="https://github.com/Sameershrinath" target="_blank" rel="noopener" style="color:var(--accent)">github.com/Sameershrinath</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="section-heading">
+      <h2>My <span>Skills</span></h2>
+      <div class="divider"></div>
+      <p>Technologies I work with</p>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-category">
+        <h3><span class="icon">🐍</span> Python</h3>
+        <div class="skill-bar"><div class="skill-bar-label"><span>Core Python</span><span>90%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-label"><span>NumPy / Pandas</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-label"><span>Matplotlib / Seaborn</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
+      </div>
+
+      <div class="skill-category">
+        <h3><span class="icon">🤖</span> Machine Learning</h3>
+        <div class="skill-bar"><div class="skill-bar-label"><span>Scikit-Learn</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-label"><span>TensorFlow / Keras</span><span>70%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-label"><span>Model Deployment</span><span>75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div></div>
+      </div>
+
+      <div class="skill-category">
+        <h3><span class="icon">💬</span> NLP</h3>
+        <div class="skill-bar"><div class="skill-bar-label"><span>NLTK</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-label"><span>Text Preprocessing</span><span>78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-label"><span>Classification</span><span>75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div></div>
+      </div>
+
+      <div class="skill-category">
+        <h3><span class="icon">🌐</span> Web & Backend</h3>
+        <div class="skill-bar"><div class="skill-bar-label"><span>Django / REST APIs</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-label"><span>Node.js / Express</span><span>72%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="72"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-label"><span>HTML / CSS / JS</span><span>78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div></div>
+      </div>
+
+      <div class="skill-category">
+        <h3><span class="icon">🗄️</span> Database & Tools</h3>
+        <div class="skill-bar"><div class="skill-bar-label"><span>SQL</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-label"><span>Git & GitHub</span><span>82%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-label"><span>Jupyter Notebooks</span><span>90%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="section-heading">
+      <h2>My <span>Projects</span></h2>
+      <div class="divider"></div>
+      <p>Things I've built and explored</p>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">❤️</div>
+        <h3>Heart Disease Prediction</h3>
+        <p>A machine learning model that predicts the likelihood of heart disease using patient health metrics. Built with Scikit-Learn, exploring KNN, Logistic Regression, and ensemble methods.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Scikit-Learn</span>
+          <span class="tag">ML</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Sameershrinath/5th_sem/tree/main/PYTHON/machine_learning" target="_blank" rel="noopener">View Code →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">📧</div>
+        <h3>Spam Classifier</h3>
+        <p>NLP-powered email/SMS spam classifier using NLTK for text preprocessing and Naive Bayes / SVM for classification. Achieves high accuracy on standard spam datasets.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">NLTK</span>
+          <span class="tag">NLP</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Sameershrinath/5th_sem/tree/main/PYTHON/machine_learning/Proj" target="_blank" rel="noopener">View Code →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">⚽</div>
+        <h3>Player Salary Prediction</h3>
+        <p>Regression model that predicts professional player salaries based on performance statistics. Involves extensive feature engineering and data cleaning.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Regression</span>
+          <span class="tag">Pandas</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Sameershrinath/5th_sem/tree/main/PYTHON/machine_learning/Proj" target="_blank" rel="noopener">View Code →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">💉</div>
+        <h3>Diabetes Prediction API</h3>
+        <p>A deployed ML model served via a REST API (Flask/Django). Users submit health parameters through a web form and receive real-time diabetes risk predictions.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Django</span>
+          <span class="tag">REST API</span>
+          <span class="tag">ML</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Sameershrinath/5th_sem/tree/main/PYTHON/API/diabetes_app" target="_blank" rel="noopener">View Code →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <h3>Data Analysis Suite</h3>
+        <p>Comprehensive data analysis and visualization using Pandas, NumPy, Matplotlib, and Seaborn. Covers data cleaning, EDA, statistical analysis, and visual storytelling.</p>
+        <div class="project-tags">
+          <span class="tag">Pandas</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">Seaborn</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Sameershrinath/5th_sem/tree/main/PYTHON/DATA_SCIENCE" target="_blank" rel="noopener">View Code →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🧮</div>
+        <h3>Node.js Calculator API</h3>
+        <p>A RESTful calculator built with Node.js, demonstrating HTTP server creation, routing, and request handling. Includes modular handler architecture and route management.</p>
+        <div class="project-tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">REST</span>
+          <span class="tag">JavaScript</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Sameershrinath/5th_sem/tree/main/Web/Node_learning/calculatorProj" target="_blank" rel="noopener">View Code →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="section-heading">
+      <h2>Get In <span>Touch</span></h2>
+      <div class="divider"></div>
+      <p>Have a project in mind or want to collaborate? Reach out!</p>
+    </div>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h3>Let's Talk</h3>
+        <p>
+          I'm always open to discussing new projects, creative ideas, or opportunities
+          to be part of your vision. Drop a message and I'll get back to you!
+        </p>
+        <div class="contact-detail">
+          <div class="icon">📍</div>
+          <span>India</span>
+        </div>
+        <div class="contact-detail">
+          <div class="icon">💻</div>
+          <span>github.com/Sameershrinath</span>
+        </div>
+        <div class="contact-detail">
+          <div class="icon">🔗</div>
+          <span>linkedin.com/in/sameershrinath</span>
+        </div>
+      </div>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="What's this about?" />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Your message..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start">Send Message ✉️</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Designed &amp; Built by <span>Sameer Shrinath</span> &nbsp;·&nbsp; 2024</p>
+  </footer>
+
+  <!-- Toast notification -->
+  <div id="toast">✅ Message sent successfully!</div>
+
+  <script>
+    /* ---------- Hamburger ---------- */
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    hamburger.addEventListener('keydown', e => { if (e.key === 'Enter') navLinks.classList.toggle('open'); });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    /* ---------- Typing animation ---------- */
+    const roles = ['ML Engineer 🤖', 'Data Scientist 📊', 'Backend Developer 🌐', 'NLP Enthusiast 💬'];
+    let roleIdx = 0, charIdx = 0, deleting = false;
+    const typedEl = document.getElementById('typed-text');
+    function type() {
+      const current = roles[roleIdx];
+      if (!deleting) {
+        typedEl.textContent = current.slice(0, ++charIdx);
+        if (charIdx === current.length) { deleting = true; setTimeout(type, 1800); return; }
+      } else {
+        typedEl.textContent = current.slice(0, --charIdx);
+        if (charIdx === 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; }
+      }
+      setTimeout(type, deleting ? 60 : 100);
+    }
+    type();
+
+    /* ---------- Skill bar animation on scroll ---------- */
+    const fills = document.querySelectorAll('.skill-bar-fill');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.width = entry.target.dataset.width + '%';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    fills.forEach(f => observer.observe(f));
+
+    /* ---------- Contact form ---------- */
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name    = this.name.value.trim();
+      const email   = this.email.value.trim();
+      const message = this.message.value.trim();
+      if (!name || !email || !message) {
+        showToast('⚠️ Please fill in all required fields.');
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast('⚠️ Please enter a valid email address.');
+        return;
+      }
+      this.reset();
+      showToast('✅ Message sent successfully!');
+    });
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+  </script>
+</body>
+</html>
