@@ -56,7 +56,10 @@
     .nav-links a:hover { color: var(--accent); }
 
     /* hamburger */
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
     .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: var(--transition); }
 
     /* ---------- Sections ---------- */
@@ -278,9 +281,9 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </nav>
 
   <!-- Hero -->
@@ -524,6 +527,7 @@
         </div>
       </div>
       <form class="contact-form" id="contactForm" novalidate>
+        <!-- Demo form: connect to a backend or form service (e.g. Formspree) to enable real submissions -->
         <div class="form-row">
           <div class="form-group">
             <label for="name">Name</label>
@@ -543,6 +547,7 @@
           <textarea id="message" name="message" placeholder="Your message..." required></textarea>
         </div>
         <button type="submit" class="btn btn-primary" style="align-self:flex-start">Send Message ✉️</button>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:0.25rem">Demo form — wire up a backend or <a href="https://formspree.io" target="_blank" rel="noopener" style="color:var(--accent)">Formspree</a> to enable real submissions.</p>
       </form>
     </div>
   </section>
@@ -559,9 +564,14 @@
     /* ---------- Hamburger ---------- */
     const hamburger = document.getElementById('hamburger');
     const navLinks  = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
-    hamburger.addEventListener('keydown', e => { if (e.key === 'Enter') navLinks.classList.toggle('open'); });
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    hamburger.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }));
 
     /* ---------- Typing animation ---------- */
     const roles = ['ML Engineer 🤖', 'Data Scientist 📊', 'Backend Developer 🌐', 'NLP Enthusiast 💬'];
